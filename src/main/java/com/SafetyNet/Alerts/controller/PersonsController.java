@@ -21,7 +21,7 @@ public class PersonsController {
 
     //Get an email list
     @RequestMapping(value = "communityEmail", method = RequestMethod.GET)
-    public List<String> listeEmails(@RequestParam(name = "city") String city) {
+    public List<String> listEmails(@RequestParam(name = "city") String city) {
 
         return this.personService.findAllEmailsByCity(city);
 
