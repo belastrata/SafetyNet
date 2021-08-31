@@ -1,11 +1,10 @@
 package com.SafetyNet.Alerts.controller;
 
 
-import com.SafetyNet.Alerts.model.FireStation;
-import com.SafetyNet.Alerts.model.MedicalRecord;
 import com.SafetyNet.Alerts.model.Person;
 import com.SafetyNet.Alerts.service.PersonService;
 
+import com.SafetyNet.Alerts.service.dto.FireDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +26,26 @@ public class PersonsController {
 
     }
 
+    //http://localhost:8080/phoneAlert?firestation=<firestation_number>
+    @RequestMapping(value = "phoneAlert", method = RequestMethod.GET)
+    public List<String> listPhone(@RequestParam(name = "firestation") String firestation) {
+
+        return this.personService.findAllPhoneByFirestation(firestation);
+    }
+
+    @RequestMapping(value = "fire", method = RequestMethod.GET)
+    public List<FireDto> listAddress(@RequestParam(name = "address") String address) {
+
+        return this.personService.findAllfireByAddress(address);
+    }
+
+        //http://localhost:8080/Persons
+        @RequestMapping(value = "/Persons", method = RequestMethod.GET)
+        public List<Person> getListOfPersons () {
+
+            return this.personService.getList();
+        }
+
+    }
 
 
-}
