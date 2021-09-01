@@ -4,6 +4,7 @@ package com.SafetyNet.Alerts.controller;
 import com.SafetyNet.Alerts.model.Person;
 import com.SafetyNet.Alerts.service.PersonService;
 
+import com.SafetyNet.Alerts.service.dto.ChildAlertDto;
 import com.SafetyNet.Alerts.service.dto.FireDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,14 @@ public class PersonsController {
 
             return this.personService.getList();
         }
+
+    @RequestMapping(value = "childAlert", method = RequestMethod.GET)
+    public List<ChildAlertDto> listChildAlert(@RequestParam(name = "address") String address) {
+
+        return this.personService.findAllchildByAddress(address);
+    }
+
+
 
     }
 

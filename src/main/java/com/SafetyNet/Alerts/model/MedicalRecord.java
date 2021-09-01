@@ -29,6 +29,7 @@ public class MedicalRecord {
     private String birthdate;
 
 
+
     public String getBirthdate() {
         return birthdate;
     }
@@ -52,5 +53,6 @@ public class MedicalRecord {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 
 }
