@@ -50,7 +50,7 @@ public class PersonsController {
     @RequestMapping(value = "childAlert", method = RequestMethod.GET)
     public List<ChildAlertDto> listChildAlert(@RequestParam(name = "address") String address) {
 
-        return this.personService.findAllchildByAddress(address);
+        return this.personService.findAllchildsUnder18ByAddress(address);
     }
 
 

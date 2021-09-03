@@ -13,5 +13,9 @@ public class MedicalRecordsRepository {
     public List<MedicalRecord> findAllMedicalRecords() {
         return dataHandler.getData().getMedicalrecords();
     }
+
+    public List<MedicalRecord> findAllMedicalRecordsUnder18() {
+        return null;
+    }
 }
 

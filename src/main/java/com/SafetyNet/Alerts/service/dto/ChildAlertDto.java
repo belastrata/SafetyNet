@@ -2,46 +2,45 @@ package com.SafetyNet.Alerts.service.dto;
 
 import com.SafetyNet.Alerts.model.Person;
 
-import java.awt.*;
 import java.util.List;
 
 public class ChildAlertDto {
 
-    private String lastname;
-    private String firstname;
-    private String age;
+    private String LastName;
+    private String FirstName;
+    private String Age;
 
-    private List<Person> numberofhousehold;
+    private List<Person> numerologist;
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return LastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastname) {
+        this.LastName = lastname;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return FirstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstname) {
+        this.FirstName = firstname;
     }
 
     public String getAge() {
-        return age;
+        return Age;
     }
 
     public void setAge(String age) {
-        this.age = age;
+        this.Age = age;
     }
 
-    public List<Person> getNumberofhousehold() {
-        return numberofhousehold;
+    public List<Person> getNumerologist() {
+        return numerologist;
     }
 
-    public void setNumberofhousehold(List<Person> numberofhousehold) {
-        this.numberofhousehold = numberofhousehold;
+    public void setNumerologist(List<Person> numerologist) {
+        this.numerologist = numerologist;
     }
 }

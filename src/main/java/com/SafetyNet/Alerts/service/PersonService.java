@@ -74,7 +74,7 @@ public class PersonService {
                             dto.setLastname(p.getLastName());
                             dto.setMedications(mr.getMedications());
                             dto.setPhone(p.getPhone());
-                            dto.setAge(calculateAge(mr.getBirthdate()));
+                            dto.setAge(String.valueOf(calculateAge(mr.getBirthdate())));
                             fireDtos.add(dto);
                         }
 
@@ -85,44 +85,61 @@ public class PersonService {
         return fireDtos;
     }
 
-    public static String calculateAge(String birthdate) {
+    public static int calculateAge(String birthdate) {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        String date = birthdate;
+
 
         //convert String to LocalDate
-        LocalDate localDate = LocalDate.parse(date, formatter);
+        LocalDate localDate = LocalDate.parse(birthdate, formatter);
         if ((birthdate != null) && (currentDate != null)) {
-            return String.valueOf(Period.between(localDate, currentDate).getYears() );
+            return Period.between(localDate, currentDate).getYears();
         } else {
-            return "0";
+            return 0;
         }
     }
 
-    public List<ChildAlertDto> findAllchildByAddress(String address) {
+    public List<ChildAlertDto> findAllchildsUnder18ByAddress(String address) {
 
-        List<ChildAlertDto> childAlertDto = new ArrayList<>();
-        List<Person> persList = personRepository.findAllpersonByAddress(address);
-        List<MedicalRecord> medicalRList = medicalRecordsRepository.findAllMedicalRecords();
+        List<ChildAlertDto> result = new ArrayList<>();
+// récuperer la liste des peronnes habitants à cette adresse
 
-        for (Person p : persList ){
-            for (MedicalRecord mr: medicalRList){
-                if (p.getAdress().equals(mr.getBirthdate())){
-                    if (mr.getLastName().equals(p.getFirstName())){
-                        ChildAlertDto dto = new ChildAlertDto();
-                        dto.setFirstname(p.getLastName());
-                        dto.setLastname(mr.getFirstName());
-                        dto.setAge(calculateAge(p.getAdress()));
-                        childAlertDto.add(dto);
+        List<Person> persons = personRepository.findAllpersonByAddress(address);
+// recuperer la liste des medical records de - de 18 ans
 
-                    }
-                }
+        List<MedicalRecord> medicalRecords = medicalRecordsRepository.findAllMedicalRecordsUnder18();
+
+// pour chaque élément de personne rechercher dans la liste des - 18 ans
+        // je crée une troisieme liste et je fait rentrer les noms qui correspondent
+        for (Person person : persons) {
+            MedicalRecord medicalRecord = medicalRecordsContainsPerson(medicalRecords, person);
+            if (medicalRecord != null) {
+                ChildAlertDto dto = new ChildAlertDto();
+                dto.setFirstName(person.getFirstName());
+                dto.setLastName(person.getLastName());
+                dto.setAge(String.valueOf(calculateAge(medicalRecord.getBirthdate())));
+                dto.setNumerologist(persons.stream().filter(p -> !p.getFirstName().equals(person.getFirstName())).collect(Collectors.toList()));
+                result.add(dto);
             }
         }
-        return childAlertDto;
 
+
+        return result;
+    }
+
+    private MedicalRecord medicalRecordsContainsPerson(List<MedicalRecord> medicalRecords, Person person) {
+        MedicalRecord medicalRecord = new MedicalRecord();
+        for (MedicalRecord mr : medicalRecords){
+
+        }
+        return medicalRecord;
+    }
+
+    public String findAllChildByAddress(String address) {
+        return address;
     }
 }
+
 
 
 
